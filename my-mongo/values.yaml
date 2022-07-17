@@ -1,0 +1,23 @@
+mongodb:
+  name: mongodb
+  replicas: 1
+  image: mongo
+  port: 27017
+mongodbService:
+  name: mongodb-service
+  portName: mongodb-port
+  port: 27017
+mongoSecret:
+  name: mongo-secret
+mongoConfigmap:
+  name: mongo-configmap
+mongoExpress:
+  name: mongo-express
+  replicas: 1
+  image: mongo-express
+  port: 8081
+mongoExpressService:
+  name: mongo-express-service
+  portName: mongo-express-port
+  port: 27017
+  nodePort: 30001
