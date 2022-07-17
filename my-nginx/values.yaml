@@ -1,0 +1,10 @@
+nginx:
+  deployment:
+    name: nginx-deployment
+    image: nginx
+    containerPort: 80
+  service:
+    name: nginx-service
+    portName: nginx-port
+    servicePort: 8080
+    nodePort: 30000

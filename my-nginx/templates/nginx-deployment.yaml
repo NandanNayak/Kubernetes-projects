@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nginx.deployment.name }}
+  labels:
+    app: {{ .Values.nginx.deployment.image }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.nginx.deployment.image }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nginx.deployment.image }}
+    spec:
+      containers:
+      - name: {{ .Values.nginx.deployment.image }}
+        image: {{ .Values.nginx.deployment.image }}
+        ports:
+        - containerPort: {{ .Values.nginx.deployment.containerPort }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  type:  LoadBalancer
+  ports:
+  - name:  nginx-port
+    port:  {{ .Values.nginx.service.servicePort }}
+    targetPort: {{ .Values.nginx.deployment.containerPort }}
+    nodePort: {{ .Values.nginx.service.nodePort }}
